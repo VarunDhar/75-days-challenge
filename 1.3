@@ -1,0 +1,66 @@
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        int carry=1;
+        
+        if(digits[digits.size()-1]!=9)
+        {
+            digits[digits.size()-1]+=1;
+            return digits;
+        }
+        
+        if(digits.size()==1)
+        {
+            if(digits[0]==9)
+            {
+                return {1,0};
+            }
+            else
+                return {digits[0]+1};
+        }
+        digits[digits.size()-1]+=1;
+        if(digits[digits.size()-1]<10)
+            carry=0;
+        else
+            digits[digits.size()-1]=0;
+        
+        for(int i=digits.size()-2;i>=0;i--)
+        {
+            
+            if(carry==1)
+            {
+                digits[i]+=1;
+                if(digits[i]<10)
+                    carry=0;
+                else
+                {
+                    digits[i]=0;
+                }
+            }
+            if(carry==0)
+            {
+                if(digits[i]>9)
+                {
+                    carry=1;
+                    digits[i]=0;
+                }
+                else
+                {
+                    return digits;
+                }
+            }
+        }
+        vector<int> dig;
+        if(carry==1)
+        {
+            
+            dig.push_back(1);
+            for(int i=0;i<digits.size();i++)
+            {
+                dig.push_back(digits[i]);
+            }
+            
+        }
+        return dig;
+    }
+};
