@@ -1,0 +1,44 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        set<vector<int>> trip;
+        vector<vector<int>> ans;
+        int i=0;
+        int j,k;
+        sort(nums.begin(),nums.end());
+        if(nums.size()==1 or nums.size()==0 or nums.size()==2)
+        {
+            return {};
+        }
+        
+        while(i<nums.size()-2)
+        {
+            j=i+1;
+            k=nums.size()-1;
+            while(j<k)
+            {
+                if(nums[j]+nums[k]+nums[i]> 0)
+                {
+                    k--;
+                }
+                else if(nums[j]+nums[k]+nums[i]< 0)
+                {
+                    j++;
+                }
+                else
+                {
+                    trip.insert({nums[i],nums[j],nums[k]});
+                    j++;
+                    k--;
+                }
+            }
+            i++;
+        }
+        
+        for(auto itr=trip.begin();itr!=trip.end();itr++)
+        {
+            ans.push_back(*itr);
+        }
+        return ans;
+    }
+};
