@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int,int> mp;
+        
+        int i=0;
+        int currsum=0;
+        int cnt=0;
+        mp[0]=1;
+        while(i<nums.size())
+        {
+            currsum+=nums[i];
+            if(mp.find(currsum-k)!=mp.end())
+            {
+                cnt+=mp[currsum-k];
+            }
+            if(mp.find(currsum)!=mp.end())
+                mp[currsum]+=1;
+            else
+                mp[currsum]=1;
+            i++;
+        }
+        return cnt;
+    }
+};
